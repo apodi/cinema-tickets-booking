@@ -17,6 +17,7 @@ You can easily swap out dependencies (e.g., replace TicketPaymentService with a 
 ## Running the Project
 
 1. **Install Dependencies**: Run `npm install` to install all necessary packages.
-2. **Run Tests**: Use `npm test` to execute unit tests and ensure everything is working correctly.
+2. **Create .env File**: Copy the `.env.sample` file to `.env` by running `cp .env.sample .env`.
+3. **Run Tests**: Use `npm test` to execute unit tests and ensure everything is working correctly.
 
 

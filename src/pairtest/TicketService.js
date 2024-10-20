@@ -3,7 +3,7 @@ import InvalidPurchaseException from "./lib/InvalidPurchaseException.js";
 import TicketPaymentService from "../thirdparty/paymentgateway/TicketPaymentService.js";
 import SeatReservationService from "../thirdparty/seatbooking/SeatReservationService.js";
 import ErrorCodes from "./lib/ErrorCodes.js";
-import TICKET_PRICES from "../config/config.js";
+import { TICKET_PRICES, TICKET_TYPES} from "../config/config.js";
 
 export default class TicketService {
   constructor(paymentService = new TicketPaymentService(), reservationService = new SeatReservationService()) {
@@ -43,11 +43,15 @@ export default class TicketService {
 
   #validateTicketRequests(ticketTypeRequests) {
     ticketTypeRequests.forEach((request) => {
-      if (!(request instanceof TicketTypeRequest)) {
+      if (!(request instanceof TicketTypeRequest) || !TICKET_TYPES.includes(request.getTicketType())) {
+        throw new InvalidPurchaseException(ErrorCodes.INVALID_TICKET_REQUEST);
+      }
+      if (request.getNoOfTickets() <= 0 || !Number.isInteger(request.getNoOfTickets())) {
         throw new InvalidPurchaseException(ErrorCodes.INVALID_TICKET_REQUEST);
       }
     });
   }
+  
 
   #calculateTotals(ticketTypeRequests) {
     let totalTickets = 0;
