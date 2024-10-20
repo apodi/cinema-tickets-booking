@@ -12,7 +12,7 @@ You can easily swap out dependencies (e.g., replace TicketPaymentService with a 
 
 ### 3. Future-Proofing with `await`
 - Added `await` to `makePayment` and `reserveSeat` to handle potential future async operations without refactoring.
-- Currently, makePayment and reserveSeat are synchronous, but they may become asynchronous in the future due to IO operations or AP call.
+- Currently, makePayment and reserveSeat are synchronous, but they may become asynchronous in the future due to IO operations or API call.
 
 ## Running the Project
 
